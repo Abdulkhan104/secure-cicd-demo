@@ -1,0 +1,46 @@
+name: Deploy to GKE
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  PROJECT_ID: gen-lang-client-0965257658
+  REGION: us-central1
+  GKE_CLUSTER: secure-cluster
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Setup Docker Auth
+        run: |
+          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+      - name: Build and Push Container
+        run: |
+          docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-app-repo/my-app:${{ github.sha }} .
+          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-app-repo/my-app:${{ github.sha }}
+
+      - name: Deploy to GKE
+        run: |
+          gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --region ${{ env.REGION }}
+          kubectl create deployment my-app --image=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/my-app-repo/my-app:${{ github.sha }} --dry-run=client -o yaml | kubectl apply -f -
+          kubectl expose deployment my-app --port=80 --type=LoadBalancer --dry-run=client -o yaml | kubectl apply -f -
