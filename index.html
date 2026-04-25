@@ -1,8 +1,191 @@
 <!DOCTYPE html>
-<html>
-<head><title>Secure CI/CD Demo</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure CI/CD Demo | GKE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: bounce 1s ease;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .info-card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4caf50;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.8em;
+        }
+        
+        .green {
+            color: #4caf50;
+            font-weight: bold;
+        }
+    </style>
+</head>
 <body>
-    <h1>🚀 Deployed via Private Cloud Build  by abdul khan  !</h1>
-    <p>No internet access, no service account keys!</p>
+    <div class="container">
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+            </svg>
+        </div>
+        
+        <h1>🚀 Deployment Successful!</h1>
+        <p style="color: #666; margin-bottom: 10px;">Your secure CI/CD pipeline is fully operational</p>
+        
+        <div class="badge">
+            <span class="status"></span> LIVE | GKE Private Cluster
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>🔐 Workload Identity Federation</h3>
+                <p>GitHub Actions → GCP without service account keys. OIDC token exchange for secure authentication.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>🏭 Private Cloud Build</h3>
+                <p>Builds run in isolated VPC with no public internet access. Maximum security for your code.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>🎭 GKE Workload Identity</h3>
+                <p>Pods authenticate using Kubernetes service accounts mapped to GCP service accounts.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3>📦 Artifact Registry</h3>
+                <p>Private container registry within your VPC. Images never leave your secure environment.</p>
+            </div>
+        </div>
+        
+        <div style="background: #e8f5e9; padding: 15px; border-radius: 10px; margin: 20px 0;">
+            <p style="color: #2e7d32; margin: 0;">
+                ✅ <strong>End-to-End Security Pipeline</strong><br>
+                GitHub → WIF → Cloud Build (Private) → Artifact Registry → GKE → Secret Manager
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>Deployed via <strong>GitHub Actions</strong> | Private Cloud Build Pool | GKE with Workload Identity</p>
+            <p style="margin-top: 10px;">🔒 <span class="green">No service account keys were used in this deployment</span></p>
+        </div>
+    </div>
 </body>
 </html>
