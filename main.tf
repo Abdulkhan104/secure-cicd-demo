@@ -170,8 +170,9 @@ resource "google_project_iam_member" "cloudbuild_permissions" {
 #  SM secret manager
 resource "google_secret_manager_secret" "api_key" {
   secret_id = "api-key"
+
   replication {
-    # automatic = true
+    auto {}
   }
 }
 
