@@ -197,7 +197,7 @@ resource "google_service_account" "app" {
 # WORKLOAD IDENTITY FEDERATION (GitHub → GCP)
 # Create Workload Identity Pool
 resource "google_iam_workload_identity_pool" "github" {
-  workload_identity_pool_id = "github-pool"
+  workload_identity_pool_id = "github-pool-v2"
   display_name              = "GitHub Actions Pool"
   description               = "OIDC federation for GitHub Actions"
 }
