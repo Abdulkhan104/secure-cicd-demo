@@ -1,0 +1,10 @@
+# cloudbuild.yaml
+steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud container clusters get-credentials secure-cluster --region=us-central1
+        kubectl create deployment my-app --image=${_IMAGE} --dry-run=client -o yaml | kubectl apply -f -
+        kubectl expose deployment my-app --port=80 --type=LoadBalancer --dry-run=client -o yaml | kubectl apply -f -
