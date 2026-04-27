@@ -4,7 +4,353 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CarePlus Healthcare | Quality Medical Care</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo h2 {
+            color: #2c5f8a;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li {
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links li:hover a {
+            color: #2c5f8a;
+        }
+
+        .btn-appointment {
+            background: #2c5f8a;
+            color: white !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding-top: 80px;
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c5f8a 0%, #1a3a52 100%);
+            color: white;
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            transition: transform 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5f8a;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #2c5f8a;
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 60px 0;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Doctors Grid */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 60px 0;
+        }
+
+        .doctor-card {
+            background: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .doctor-image {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Form Styles */
+        .form-container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .confirmation {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: #999;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .footer-section li {
+            margin: 0.5rem 0;
+        }
+
+        .footer-section a {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #2c5f8a 0%, #1a3a52 100%);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid,
+            .services-grid,
+            .doctors-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -13,80 +359,265 @@
                 <h2>🏥 CarePlus Healthcare</h2>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="doctors.html">Doctors</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="appointment.html" class="btn-appointment">Book Appointment</a></li>
+                <li><a onclick="showPage('home')">Home</a></li>
+                <li><a onclick="showPage('about')">About</a></li>
+                <li><a onclick="showPage('services')">Services</a></li>
+                <li><a onclick="showPage('doctors')">Doctors</a></li>
+                <li><a onclick="showPage('appointment')" class="btn-appointment">Book Appointment</a></li>
             </ul>
-            <div class="mobile-menu">☰</div>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Your Health, Our Priority</h1>
-                <p>Providing quality healthcare services with compassion and excellence. 24/7 emergency care available.</p>
-                <div class="hero-buttons">
-                    <a href="appointment.html" class="btn btn-primary">Book Appointment</a>
-                    <a href="services.html" class="btn btn-secondary">Our Services</a>
+    <!-- HOME PAGE -->
+    <div id="home" class="page active-page">
+        <header class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Your Health, Our Priority</h1>
+                    <p>Providing quality healthcare services with compassion and excellence. 24/7 emergency care available.</p>
+                    <div class="hero-buttons">
+                        <button onclick="showPage('appointment')" class="btn btn-primary">Book Appointment</button>
+                        <button onclick="showPage('services')" class="btn btn-secondary">Our Services</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title">Why Choose CarePlus?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>15+ Years Experience</h3>
-                    <p>Trusted by over 100,000 patients with proven track record of excellence.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍⚕️</div>
-                    <h3>Expert Doctors</h3>
-                    <p>Board-certified specialists across 30+ medical disciplines.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏥</div>
-                    <h3>Modern Facilities</h3>
-                    <p>State-of-the-art equipment and technology for accurate diagnosis.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚑</div>
-                    <h3>24/7 Emergency</h3>
-                    <p>Round-the-clock emergency services with rapid response team.</p>
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose CarePlus?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏆</div>
+                        <h3>15+ Years Experience</h3>
+                        <p>Trusted by over 100,000 patients with proven track record of excellence.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍⚕️</div>
+                        <h3>Expert Doctors</h3>
+                        <p>Board-certified specialists across 30+ medical disciplines.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🏥</div>
+                        <h3>Modern Facilities</h3>
+                        <p>State-of-the-art equipment and technology for accurate diagnosis.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚑</div>
+                        <h3>24/7 Emergency</h3>
+                        <p>Round-the-clock emergency services with rapid response team.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="stats">
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat">
+                        <div class="stat-number">100K+</div>
+                        <div class="stat-label">Happy Patients</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Expert Doctors</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">Specialties</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Emergency Care</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>About CarePlus Healthcare</h1>
+                <p>Excellence in healthcare since 2010</p>
+            </div>
+        </div>
+
+        <section style="padding: 60px 0;">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <h2 style="color: #2c5f8a; margin-bottom: 1rem;">Our Mission</h2>
+                    <p style="margin-bottom: 2rem;">To provide compassionate, high-quality healthcare services that improve the health and well-being of our community through excellence in patient care, education, and research.</p>
+                    
+                    <h2 style="color: #2c5f8a; margin-bottom: 1rem;">Our Vision</h2>
+                    <p style="margin-bottom: 2rem;">To be the most trusted healthcare provider, recognized for clinical excellence, patient safety, and innovative medical solutions.</p>
+                    
+                    <h2 style="color: #2c5f8a; margin-bottom: 1rem;">Our Values</h2>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin: 1rem 0; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">✨ <strong>Compassion:</strong> Treat every patient with dignity and empathy</li>
+                        <li style="margin: 1rem 0; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">🔬 <strong>Excellence:</strong> Commit to highest standards of care</li>
+                        <li style="margin: 1rem 0; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">🤝 <strong>Integrity:</strong> Act with honesty and transparency</li>
+                        <li style="margin: 1rem 0; padding: 0.5rem; background: #f8f9fa; border-radius: 5px;">💡 <strong>Innovation:</strong> Embrace cutting-edge medical technology</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>Our Medical Services</h1>
+                <p>Comprehensive healthcare solutions for every need</p>
+            </div>
+        </div>
+
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat">
-                    <div class="stat-number">100K+</div>
-                    <div class="stat-label">Happy Patients</div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">❤️</div>
+                    <h3>Cardiology</h3>
+                    <p>Heart health, diagnostics, and treatment including angioplasty and bypass surgery.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Expert Doctors</div>
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Neurology</h3>
+                    <p>Brain and nervous system disorders, stroke care, and neurosurgery.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">Specialties</div>
+                <div class="service-card">
+                    <div class="service-icon">🦴</div>
+                    <h3>Orthopedics</h3>
+                    <p>Bone, joint, and muscle care including joint replacement and sports medicine.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Emergency Care</div>
+                <div class="service-card">
+                    <div class="service-icon">👶</div>
+                    <h3>Pediatrics</h3>
+                    <p>Specialized care for infants, children, and adolescents.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🤰</div>
+                    <h3>Obstetrics & Gynecology</h3>
+                    <p>Women's health, pregnancy care, and reproductive health services.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👁️</div>
+                    <h3>Ophthalmology</h3>
+                    <p>Eye care including vision tests, cataract surgery, and LASIK.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- DOCTORS PAGE -->
+    <div id="doctors" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>Meet Our Expert Doctors</h1>
+                <p>Highly qualified and experienced medical professionals</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-image">👨‍⚕️</div>
+                    <h3>Dr. James Wilson</h3>
+                    <p class="doctor-specialty" style="color: #ff6b6b;">Cardiologist</p>
+                    <p>20 years experience | MD, FACC</p>
+                    <button onclick="showPage('appointment')" class="btn btn-primary" style="margin-top: 1rem;">Book Appointment</button>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👩‍⚕️</div>
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p class="doctor-specialty" style="color: #ff6b6b;">Neurologist</p>
+                    <p>15 years experience | MD, PhD</p>
+                    <button onclick="showPage('appointment')" class="btn btn-primary" style="margin-top: 1rem;">Book Appointment</button>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👨‍⚕️</div>
+                    <h3>Dr. Michael Chen</h3>
+                    <p class="doctor-specialty" style="color: #ff6b6b;">Orthopedic Surgeon</p>
+                    <p>18 years experience | MD, FRCS</p>
+                    <button onclick="showPage('appointment')" class="btn btn-primary" style="margin-top: 1rem;">Book Appointment</button>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👩‍⚕️</div>
+                    <h3>Dr. Emily Rodriguez</h3>
+                    <p class="doctor-specialty" style="color: #ff6b6b;">Pediatrician</p>
+                    <p>12 years experience | MD, FAAP</p>
+                    <button onclick="showPage('appointment')" class="btn btn-primary" style="margin-top: 1rem;">Book Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPOINTMENT PAGE -->
+    <div id="appointment" class="page">
+        <div class="page-header">
+            <div class="container">
+                <h1>Book an Appointment</h1>
+                <p>Schedule your visit with our expert doctors</p>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form id="appointmentForm" onsubmit="submitAppointment(event)">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Doctor *</label>
+                    <select id="doctor" required>
+                        <option value="">Select a doctor</option>
+                        <option>Dr. James Wilson - Cardiologist</option>
+                        <option>Dr. Sarah Johnson - Neurologist</option>
+                        <option>Dr. Michael Chen - Orthopedic</option>
+                        <option>Dr. Emily Rodriguez - Pediatrician</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Preferred Date *</label>
+                    <input type="date" id="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Preferred Time *</label>
+                    <select id="time" required>
+                        <option value="">Select time</option>
+                        <option>9:00 AM</option>
+                        <option>10:00 AM</option>
+                        <option>11:00 AM</option>
+                        <option>2:00 PM</option>
+                        <option>3:00 PM</option>
+                        <option>4:00 PM</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Symptoms / Reason for Visit *</label>
+                    <textarea id="symptoms" rows="4" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+            </form>
+            <div id="confirmation" style="display:none;" class="confirmation"></div>
+        </div>
+    </div>
 
     <footer class="footer">
         <div class="container">
@@ -98,10 +629,10 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a onclick="showPage('home')">Home</a></li>
+                        <li><a onclick="showPage('about')">About Us</a></li>
+                        <li><a onclick="showPage('services')">Services</a></li>
+                        <li><a onclick="showPage('doctors')">Doctors</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -119,11 +650,45 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 CarePlus Healthcare. All rights reserved.</p>
-                <small>Deployed via Secure CI/CD Pipeline on GCP</small>
+                <small>🚀 Deployed via Secure CI/CD Pipeline on GCP | Workload Identity Federation | Private Cloud Build</small>
             </div>
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active-page');
+            });
+            // Show selected page
+            document.getElementById(pageId).classList.add('active-page');
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function submitAppointment(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const doctor = document.getElementById('doctor').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            const confirmation = document.getElementById('confirmation');
+            confirmation.style.display = 'block';
+            confirmation.innerHTML = `
+                <div class="success-message">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">✓</div>
+                    <h3>Appointment Confirmed!</h3>
+                    <p>Dear ${name}, your appointment with ${doctor} on ${date} at ${time} has been scheduled.</p>
+                    <p>A confirmation will be sent to your email shortly.</p>
+                    <p><strong>Please arrive 15 minutes before your scheduled time.</strong></p>
+                    <button onclick="location.reload()" class="btn btn-primary">Book Another</button>
+                </div>
+            `;
+            document.getElementById('appointmentForm').reset();
+            confirmation.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
