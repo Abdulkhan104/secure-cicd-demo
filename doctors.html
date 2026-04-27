@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Doctors | CarePlus Healthcare</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <!-- Same navigation -->
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Meet Our Expert Doctors</h1>
+            <p>Highly qualified and experienced medical professionals</p>
+        </div>
+    </section>
+
+    <section class="doctors-list">
+        <div class="container">
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-image">👨‍⚕️</div>
+                    <h3>Dr. James Wilson</h3>
+                    <p class="doctor-specialty">Cardiologist</p>
+                    <p class="doctor-qualification">MD, FACC - 20 years experience</p>
+                    <p>Expert in interventional cardiology and heart failure management.</p>
+                    <button class="btn-book" onclick="bookDoctor('Dr. James Wilson')">Book Appointment</button>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👩‍⚕️</div>
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p class="doctor-specialty">Neurologist</p>
+                    <p class="doctor-qualification">MD, PhD - 15 years experience</p>
+                    <p>Specializes in stroke care, epilepsy, and movement disorders.</p>
+                    <button class="btn-book" onclick="bookDoctor('Dr. Sarah Johnson')">Book Appointment</button>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👨‍⚕️</div>
+                    <h3>Dr. Michael Chen</h3>
+                    <p class="doctor-specialty">Orthopedic Surgeon</p>
+                    <p class="doctor-qualification">MD, FRCS - 18 years experience</p>
+                    <p>Joint replacement specialist and sports medicine expert.</p>
+                    <button class="btn-book" onclick="bookDoctor('Dr. Michael Chen')">Book Appointment</button>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-image">👩‍⚕️</div>
+                    <h3>Dr. Emily Rodriguez</h3>
+                    <p class="doctor-specialty">Pediatrician</p>
+                    <p class="doctor-qualification">MD, FAAP - 12 years experience</p>
+                    <p>Compassionate care for children from newborn to adolescent.</p>
+                    <button class="btn-book" onclick="bookDoctor('Dr. Emily Rodriguez')">Book Appointment</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <!-- Same footer -->
+    </footer>
+
+    <script>
+        function bookDoctor(doctorName) {
+            localStorage.setItem('selectedDoctor', doctorName);
+            window.location.href = 'appointment.html';
+        }
+    </script>
+</body>
+</html>
