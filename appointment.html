@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment | CarePlus Healthcare</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <!-- Same navigation -->
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Book an Appointment</h1>
+            <p>Schedule your visit with our expert doctors</p>
+        </div>
+    </section>
+
+    <section class="appointment-form">
+        <div class="container">
+            <div class="form-container">
+                <form id="appointmentForm" onsubmit="submitAppointment(event)">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Select Doctor *</label>
+                        <select id="doctor" required>
+                            <option value="">Select a doctor</option>
+                            <option value="Dr. James Wilson">Dr. James Wilson - Cardiologist</option>
+                            <option value="Dr. Sarah Johnson">Dr. Sarah Johnson - Neurologist</option>
+                            <option value="Dr. Michael Chen">Dr. Michael Chen - Orthopedic</option>
+                            <option value="Dr. Emily Rodriguez">Dr. Emily Rodriguez - Pediatrician</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Preferred Date *</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Preferred Time *</label>
+                        <select id="time" required>
+                            <option value="">Select time</option>
+                            <option>9:00 AM</option>
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>2:00 PM</option>
+                            <option>3:00 PM</option>
+                            <option>4:00 PM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Symptoms / Reason for Visit *</label>
+                        <textarea id="symptoms" rows="4" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+                </form>
+                <div id="confirmation" style="display:none;" class="confirmation"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <!-- Same footer -->
+    </footer>
+
+    <script>
+        // Pre-fill doctor if selected from doctors page
+        if(localStorage.getItem('selectedDoctor')) {
+            document.getElementById('doctor').value = localStorage.getItem('selectedDoctor');
+            localStorage.removeItem('selectedDoctor');
+        }
+        
+        function submitAppointment(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const doctor = document.getElementById('doctor').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            
+            const confirmation = document.getElementById('confirmation');
+            confirmation.style.display = 'block';
+            confirmation.innerHTML = `
+                <div class="success-message">
+                    <span class="checkmark">✓</span>
+                    <h3>Appointment Confirmed!</h3>
+                    <p>Dear ${name}, your appointment with ${doctor} on ${date} at ${time} has been scheduled.</p>
+                    <p>A confirmation will be sent to your email shortly.</p>
+                    <p><strong>Please arrive 15 minutes before your scheduled time.</strong></p>
+                    <button onclick="location.reload()" class="btn btn-secondary">Book Another</button>
+                </div>
+            `;
+            document.getElementById('appointmentForm').reset();
+            setTimeout(() => {
+                confirmation.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    </script>
+</body>
+</html>
